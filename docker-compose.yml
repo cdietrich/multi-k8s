@@ -1,11 +1,17 @@
 version: '3'
 services:
   client:
-    image: 'christiandietrich/multi-client'
+    image: 'christiandietrich/docker-complex-example-client'
     mem_limit: 128m
     hostname: client
+  postgres:
+    image: "postgres:latest"
+    environment:
+      - POSTGRES_PASSWORD=$PGPASSWORD
+  redis:
+    image: "redis:latest"
   server:
-    image: 'christiandietrich/multi-server'
+    image: 'christiandietrich/docker-complex-example-server'
     mem_limit: 128m
     hostname: api
     environment:
@@ -17,14 +23,14 @@ services:
       - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
   worker:
-    image: 'christiandietrich/multi-worker'
+    image: 'christiandietrich/docker-complex-example-fibonacci-worker'
     mem_limit: 128m
     hostname: worker
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
   nginx:
-    image: 'christiandietrich/multi-nginx'
+    image: 'christiandietrich/docker-complex-example-nginx'
     mem_limit: 128m
     hostname: nginx
     ports:
