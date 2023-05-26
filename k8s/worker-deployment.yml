@@ -1,11 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: worker-deployment
-
 spec:
-  replicas: 1 # todo scale
+  replicas: 1 # todo scale up
   selector:
     matchLabels:
       component: worker
