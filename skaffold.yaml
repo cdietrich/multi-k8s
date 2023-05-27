@@ -1,0 +1,49 @@
+apiVersion: skaffold/v1beta12
+
+kind: Config
+
+build:
+  artifacts:
+    - image: christiandietrich/docker-complex-example-client
+      context: client
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+          - src: 'src/**/*.css'
+            dest: .
+          - src: 'src/**/*.html'
+            dest: .
+    - image: christiandietrich/docker-complex-example-server
+      context: server
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+    - image: christiandietrich/docker-complex-example-fibonacci-worker
+      context: worker
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        manual:
+          - src: 'src/**/*.js'
+            dest: .
+  local:
+    push: false
+    useDockerCLI: true
+
+deploy:
+  kubectl:
+    manifests:
+      - k8s/client-cluster-ip-service.yml
+      - k8s/server-cluster-ip-service.yml
+      - k8s/redis-cluster-ip-service.yml
+      - k8s/postgres-cluster-ip-service.yml
+      - k8s/ingress-service.yml
+      - k8s/server-deployment.yml
+      - k8s/worker-deployment.yml
+      - k8s/client-deployment.yml

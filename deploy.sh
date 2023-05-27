@@ -15,8 +15,8 @@ docker push christiandietrich/docker-complex-example-fibonacci-worker:$SHA
 docker push christiandietrich/docker-complex-example-fibonacci-worker:latest
 
 # Apply all configs in the k8s folder
-kubectl apply -f k8s
+#kubectl apply -f k8s
 # Imperatively set latest images on each deployment
-kubectl set image deployments/server-deployment server=christiandietrich/docker-complex-example-server:$SHA
-kubectl set image deployments/client-deployment client=christiandietrich/docker-complex-example-client:$SHA
-kubectl set image deployments/worker-deployment worker=christiandietrich/docker-complex-example-fibonacci-worker:$SHA
+#kubectl set image deployments/server-deployment server=christiandietrich/docker-complex-example-server:$SHA
+#kubectl set image deployments/client-deployment client=christiandietrich/docker-complex-example-client:$SHA
+#kubectl set image deployments/worker-deployment worker=christiandietrich/docker-complex-example-fibonacci-worker:$SHA
